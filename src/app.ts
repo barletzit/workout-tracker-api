@@ -1,6 +1,8 @@
 import Fastify, { FastifyInstance } from "fastify";
-import databasePlugin from "./plugins/database";
+import databasePlugin from "./plugins/database.plugin";
 import { envConfig } from "./config";
+import { users } from "./modules/users/users.plugin";
+import { auth } from "./modules/auth/auth.plugin";
 
 export async function buildApp(): Promise<FastifyInstance> {
   const fastify = Fastify({
@@ -16,14 +18,13 @@ export async function buildApp(): Promise<FastifyInstance> {
     },
   });
 
-  fastify.get("/", (request, reply) => {
-    reply.send({ hello: "world" });
-  });
-
   await fastify.register(databasePlugin, {
     connectionString: envConfig.database.url,
     maxConnections: 10,
   });
+
+  await fastify.register(users, { prefix: "users" });
+  await fastify.register(auth, { prefix: "auth" });
 
   return fastify;
 }
