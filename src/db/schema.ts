@@ -1,4 +1,4 @@
-import { relations, sql } from "drizzle-orm";
+import { relations } from "drizzle-orm";
 import {
   integer,
   pgTable,
@@ -27,6 +27,7 @@ export const users = pgTable("users", {
   name: varchar({ length: 255 }).notNull(),
   age: integer().notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
+  password: varchar("password", { length: 255 }).notNull(),
   goals: varchar({ length: 255 }).notNull(),
   ...timestamps,
 });

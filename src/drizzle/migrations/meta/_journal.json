@@ -8,6 +8,13 @@
       "when": 1734104319932,
       "tag": "0000_zippy_sentinels",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1734512529276,
+      "tag": "0001_giant_deathbird",
+      "breakpoints": true
     }
   ]
 }
